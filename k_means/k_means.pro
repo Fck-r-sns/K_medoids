@@ -4,7 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    Data.cpp
+    KMeansClustering.cpp
 
 HEADERS += \
-    Data.h
+    KMeansClustering.h
