@@ -1,5 +1,5 @@
-#ifndef KMEANSCLUSTERING_H
-#define KMEANSCLUSTERING_H
+#ifndef KMEDOIDSCLUSTERING_H
+#define KMEDOIDSCLUSTERING_H
 
 #include <tuple>
 #include <vector>
@@ -7,7 +7,7 @@
 #include <set>
 
 template<typename... Types>
-class KMeansClustering
+class KMedoidsClustering
 {
 public:
     using Tuple = std::tuple<Types...>;
@@ -22,9 +22,9 @@ public:
     static const int PROPERTY_COUNT = sizeof...(Types);
 
 public:
-    KMeansClustering &setData(const Data *data);
-    KMeansClustering &setDistanceFunc(const DistanceFunc &func);
-    KMeansClustering &setNumberOfClusters(int k);
+    KMedoidsClustering &setData(const Data *data);
+    KMedoidsClustering &setDistanceFunc(const DistanceFunc &func);
+    KMedoidsClustering &setNumberOfClusters(int k);
     std::vector<Cluster> go();
 
 private:
@@ -34,27 +34,27 @@ private:
 };
 
 template<typename... Types>
-KMeansClustering<Types...> &KMeansClustering<Types...>::setData(const KMeansClustering::Data *data)
+KMedoidsClustering<Types...> &KMedoidsClustering<Types...>::setData(const KMedoidsClustering::Data *data)
 {
     m_data = data;
 }
 
 template<typename... Types>
-KMeansClustering<Types...> &KMeansClustering<Types...>::setDistanceFunc(const DistanceFunc &func)
+KMedoidsClustering<Types...> &KMedoidsClustering<Types...>::setDistanceFunc(const DistanceFunc &func)
 {
     m_distanceFunc = func;
 }
 
 template<typename... Types>
-KMeansClustering<Types...> &KMeansClustering<Types...>::setNumberOfClusters(int k)
+KMedoidsClustering<Types...> &KMedoidsClustering<Types...>::setNumberOfClusters(int k)
 {
     m_k = k;
 }
 
 template<typename... Types>
-std::vector<typename KMeansClustering<Types...>::Cluster> KMeansClustering<Types...>::go()
+std::vector<typename KMedoidsClustering<Types...>::Cluster> KMedoidsClustering<Types...>::go()
 {
 
 }
 
-#endif // KMEANSCLUSTERING_H
+#endif // KMEDOIDSCLUSTERING_H
