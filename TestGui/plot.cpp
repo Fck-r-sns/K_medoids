@@ -4,7 +4,7 @@
 
 const double POINT_RADIUS = 4.0;
 const double MEDOID_BORDER_WIDTH = 3.0;
-const Qt::GlobalColor POINT_COLOR = Qt::black;
+const Qt::GlobalColor DEFAULT_POINT_COLOR = Qt::black;
 const Qt::GlobalColor COLORS[] = {
     Qt::red,
     Qt::blue,
@@ -59,13 +59,14 @@ void Plot::paintEvent(QPaintEvent *)
         painter.drawEllipse(QPointF(x, y), POINT_RADIUS, POINT_RADIUS);
     };
 
-    if (!m_clusters) {
-        painter.setPen(Qt::transparent);
-        painter.setBrush(POINT_COLOR);
-        for (const Algo::Tuple &tuple : *m_data) {
-            drawTuple(tuple);
-        }
-    } else {
+
+    std::set<int> unclusteredIndices;
+    const size_t dataSize = m_data->size();
+    for (size_t i = 0; i < dataSize; ++i) {
+        unclusteredIndices.insert(i);
+    }
+
+    if (m_clusters) {
         int colorIdx = 0;
         for (const Algo::Cluster &cluster : *m_clusters) {
             painter.setPen(Qt::transparent);
@@ -74,10 +75,19 @@ void Plot::paintEvent(QPaintEvent *)
             for (int tupleIdx : cluster.indices) {
                 const auto &tuple = m_data->at(tupleIdx);
                 drawTuple(tuple);
+                unclusteredIndices.erase(tupleIdx);
             }
             painter.setPen(QPen(Qt::black, MEDOID_BORDER_WIDTH));
             drawTuple(cluster.center);
         }
+    }
+
+    // draw unclustered (added after clustering) points
+    painter.setPen(Qt::transparent);
+    painter.setBrush(DEFAULT_POINT_COLOR);
+    for (int idx : unclusteredIndices) {
+        const auto &tuple = m_data->at(idx);
+        drawTuple(tuple);
     }
 }
 
