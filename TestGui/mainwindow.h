@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QScopedPointer>
 #include "defines.h"
 
 namespace Ui {
@@ -21,9 +22,12 @@ private:
     void addNewPoint(double x, double y);
     void runClustering();
 
+    static double distanceFunc(const Algo::Tuple &t1, const Algo::Tuple &t2);
+
 private:
     Algo m_kMedoids;
     Algo::Data m_data;
+    std::vector<Algo::Cluster> m_clusters;
     Ui::MainWindow *ui;
 };
 
