@@ -1,3 +1,4 @@
 TEMPLATE = subdirs
 
-SUBDIRS += k_medoids
+SUBDIRS += k_medoids \
+    TestGui

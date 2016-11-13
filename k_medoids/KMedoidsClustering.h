@@ -26,6 +26,7 @@ public:
     static const int PROPERTY_COUNT = sizeof...(Types);
 
 public:
+    KMedoidsClustering();
     KMedoidsClustering &setData(const Data *data);
     KMedoidsClustering &setDistanceFunc(const DistanceFunc &func);
     KMedoidsClustering &setComparatorFunc(const ComparatorFunc &func);
@@ -45,9 +46,15 @@ private:
     AccumulatorFunc m_accumulatorFunc;
 
     std::random_device m_rd;
-    std::mt19937 m_mt = { m_rd() };
+    std::mt19937 m_mt;
     std::uniform_int_distribution<int> m_rand;
 };
+
+template<typename... Types>
+KMedoidsClustering<Types...>::KMedoidsClustering() :
+    m_mt(m_rd())
+{
+}
 
 template<typename... Types>
 KMedoidsClustering<Types...> &KMedoidsClustering<Types...>::setData(const KMedoidsClustering::Data *data)
