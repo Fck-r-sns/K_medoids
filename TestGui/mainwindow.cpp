@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -13,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowTitle("K-medoids test app");
 
     connect(ui->plotWidget, &Plot::sig_mouseClicked, this, &MainWindow::addNewPoint);
+    connect(ui->runButton, &QPushButton::clicked, this, &MainWindow::runClustering);
 
     m_kMedoids.setData(&m_data);
     m_kMedoids.setDistanceFunc(MainWindow::distanceFunc);
@@ -38,9 +40,15 @@ void MainWindow::addNewPoint(double x, double y)
 
 void MainWindow::runClustering()
 {
-    m_clusters = m_kMedoids
-            .setNumberOfClusters(ui->kInput->value())
-            .go();
+    try {
+        m_clusters = m_kMedoids
+                .setNumberOfClusters(ui->kInput->value())
+                .go();
+    } catch (std::exception &e) {
+        QMessageBox::critical(this, "Exception", e.what());
+        m_clusters.clear();
+    }
+
     ui->plotWidget->update();
 }
 
