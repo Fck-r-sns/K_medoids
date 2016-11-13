@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowTitle("K-medoids test app");
 
     connect(ui->plotWidget, &Plot::sig_mouseClicked, this, &MainWindow::addNewPoint);
+    connect(ui->clearButton, &QPushButton::clicked, this, &MainWindow::clearAllPoints);
     connect(ui->runButton, &QPushButton::clicked, this, &MainWindow::runClustering);
 
     m_kMedoids.setData(&m_data);
