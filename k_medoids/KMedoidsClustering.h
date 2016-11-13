@@ -91,7 +91,7 @@ std::vector<typename KMedoidsClustering<Types...>::Cluster> KMedoidsClustering<T
     }
 
     // init random number generator
-    m_rand.param(typename decltype(m_rand)::param_type(0, m_data->size()));
+    m_rand.param(typename decltype(m_rand)::param_type(0, m_data->size() - 1));
     std::vector<Cluster> clusters;
     clusters.reserve(m_k);
     std::set<int> usedIndices;
@@ -163,7 +163,7 @@ int KMedoidsClustering<Types...>::getRandomTupleIndex(const std::set<int> &excep
 template<typename... Types>
 double KMedoidsClustering<Types...>::calculateDistanceSumWithinCluster(const Tuple &from, const Cluster &cluster)
 {
-    double distanceSum;
+    double distanceSum = 0.0;
     for (int tupleIdx : cluster.indices) {
         const Tuple &t = m_data->at(tupleIdx);
         distanceSum += m_distanceFunc(from, t);
