@@ -82,7 +82,7 @@ std::vector<typename KMedoidsClustering<Types...>::Cluster> KMedoidsClustering<T
     if (!m_distanceFunc) {
         throw std::logic_error("Distance function is undefined");
     }
-    if (m_k < 0) {
+    if (m_k <= 0) {
         throw std::logic_error("Number of clusters is undefined");
     }
     const auto dataSize = m_data->size();
