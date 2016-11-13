@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "../k_medoids/KMedoidsClustering.h"
+#include "defines.h"
 
 namespace Ui {
 class MainWindow;
@@ -11,8 +11,6 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
-    using Algo = KMedoidsClustering<double, double>;
 
 public:
     explicit MainWindow(QWidget *parent = 0);

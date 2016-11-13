@@ -7,6 +7,11 @@ Plot::Plot(QWidget *parent)
 {
 }
 
+void Plot::setData(const Algo::Data *data)
+{
+    m_data = data;
+}
+
 void Plot::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);

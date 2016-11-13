@@ -26,3 +26,8 @@ void MainWindow::addNewPoint(double x, double y)
     m_data.emplace_back(x, y);
     ui->plotWidget->update();
 }
+
+void MainWindow::runClustering()
+{
+
+}

@@ -17,6 +17,7 @@ SOURCES += main.cpp\
     plot.cpp
 
 HEADERS  += mainwindow.h \
-    plot.h
+    plot.h \
+    defines.h
 
 FORMS    += mainwindow.ui
