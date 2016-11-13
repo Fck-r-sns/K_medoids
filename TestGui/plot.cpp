@@ -84,5 +84,5 @@ void Plot::paintEvent(QPaintEvent *)
 void Plot::mousePressEvent(QMouseEvent *event)
 {
     const auto pos = event->pos();
-    emit sig_mouseClicked(pos.x(), pos.y());
+    emit sig_mouseClicked(pos.x() / (double) width(), pos.y() / (double) height());
 }

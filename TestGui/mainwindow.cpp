@@ -7,7 +7,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->plotWidget->setData(&m_data);
+
     setWindowTitle("K-medoids test app");
+
+    connect(ui->plotWidget, &Plot::sig_mouseClicked, this, &MainWindow::addNewPoint);
 }
 
 MainWindow::~MainWindow()
