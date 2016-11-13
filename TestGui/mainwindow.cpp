@@ -38,7 +38,7 @@ void MainWindow::addNewPoint(double x, double y)
 
 void MainWindow::runClustering()
 {
-    *m_clusters = m_kMedoids
+    m_clusters = m_kMedoids
             .setNumberOfClusters(ui->kInput->value())
             .go();
     ui->plotWidget->update();
